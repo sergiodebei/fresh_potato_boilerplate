@@ -1,0 +1,1 @@
+var Blazy=new Blazy({success:function(){setTimeout(function(){},200)}});

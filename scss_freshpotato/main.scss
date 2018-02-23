@@ -1,0 +1,526 @@
+/*
+
+Use this theme to make something cool, have fun, and share what you've learned with others.
+
+*/
+
+/**
+ * Table of Contents
+ *
+ * 1.0 - Foundation
+ 
+ * 2.0 - Genericons
+ * 3.0 - Typography
+ * 4.0 - Elements
+ * 5.0 - Forms
+ * 6.0 - Navigation
+ *   6.1 - Links
+ *   6.2 - Menus
+ * 7.0 - Accessibility
+ */
+
+@charset 'UTF-8';
+// reset global styles
+// @import "/vendor/normalize";
+
+@import "./scss_components/reset";
+
+@import "./scss_components/functions";
+
+ 
+/* ==========================================================================
+   GridSystem, objects for the structure
+   ========================================================================== */
+
+//args
+$grid-columns: 12;
+$grid-spacing-px: 10;
+$container-width: 1100;
+
+//breakpoints
+// $breakpoints-list : 
+//     'only screen and (min-width: 100px)'
+//     'only screen and (min-width: 480px)'
+//     'only screen and (min-width: 768px)'
+//     'only screen and (min-width: 1024px)';
+
+// $breakpoints-name : xs s m l;
+
+.container {
+    max-width: $container-width + px;
+    margin: 0 auto;
+}
+
+//----- Extends
+%clearfix:after {
+    display:block;
+    clear:both;
+    // content:'';
+}
+
+.row {
+    @extend %clearfix;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+//----- when one row is followed by another, add some $grid-spacing to the top of the following one. It’s the same as .row + .row in CSS
+    & + & {
+        margin-top:$grid-spacing-px + px;
+    }
+}
+ 
+// [class^="col-"] {
+//     float:left;
+//     margin-right:$grid-spacing-px + px;
+//     -webkit-box-sizing:border-box; 
+//     -moz-box-sizing:border-box; 
+//     box-sizing:border-box;
+//     min-height: 1px; 
+//     &:last-child {
+//         margin-right:0px;
+//     }
+// }
+
+// @mixin generate-columns($sizeName, $breakPointSize){
+//     @media #{$breakPointSize}{
+//         @for $i from 1 through $grid-columns {
+//             .col-#{$sizeName}-#{$i} {
+//                 width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / $i - 1}px) / (#{$grid-columns} / #{$i}));
+//             }
+//         }
+//     }   
+// }
+
+// @for $j from 1 through length($breakpoints-name) {
+//     @include generate-columns(nth($breakpoints-name, $j), nth($breakpoints-list, $j));
+// }
+
+div[class^='col-'], div[class*=' col-']{
+    -webkit-box-sizing:border-box; 
+    -moz-box-sizing:border-box; 
+    box-sizing:border-box;
+}
+
+// .col-m-1 {
+//   width: calc((100% - 10*11px) / (12 / 1)); }
+
+// .col-m-2 {
+//   width: calc((100% - 10*5px) / (12 / 2)); }
+
+// .col-m-3 {
+//   width: calc((100% - 10*3px) / (12 / 3)); }
+
+// .col-m-4 {
+//   width: calc((100% - 10*2px) / (12 / 4)); }
+
+// .col-m-5 {
+//   width: calc((100% - 10*1.4px) / (12 / 5)); }
+
+// .col-m-6 {
+//   width: calc((100% - 10*1px) / (12 / 6)); }
+
+// .col-m-7 {
+//   width: calc((100% - 10*0.7142857143px) / (12 / 7)); }
+
+// .col-m-8 {
+//   width: calc((100% - 10*0.5px) / (12 / 8)); }
+
+// .col-m-9 {
+//   width: calc((100% - 10*0.3333333333px) / (12 / 9)); }
+
+// .col-m-10 {
+//   width: calc((100% - 10*0.2px) / (12 / 10)); }
+
+// .col-m-11 {
+//   width: calc((100% - 10*0.0909090909px) / (12 / 11)); }
+
+// .col-m-12 {
+//   width: calc((100% - 10*0px) / (12 / 12)); } 
+
+.col-m-1, .col-offset-1{
+    width: calc((100% - 10*11px) / (12 / 1));
+}
+
+.col-m-2, .col-offset-2{
+    // width: 33.33%;
+    // width: calc((100% - 30px) / 4); 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 2 - 1}px) / (#{$grid-columns} / #{2}));
+}
+
+.col-m-3, .col-offset-3{
+    // width: 33.33%;
+    // width: calc((100% - 30px) / 4); 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 3 - 1}px) / (#{$grid-columns} / #{3}));
+}
+
+.col-m-4, .col-offset-4{
+    // width: 33.33%;
+    // width: calc((100% - 20px) / 3); 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 4 - 1}px) / (#{$grid-columns} / #{4}));
+}
+
+.col-m-5, .col-offset-4{
+    width: calc((100% - 10*1.4px) / (12 / 5));
+}
+
+.col-m-6, .col-offset-6{
+    // width: 33.33%;
+    // width: calc((100% - 10px) / 2); 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 6 - 1}px) / (#{$grid-columns} / #{6}));
+}
+
+.col-m-7, .col-offset-7{
+    width: calc((100% - 10*0.7142857143px) / (12 / 7));
+}
+
+.col-m-8, .col-offset-8{
+    // width: calc((100% - 10px) / 3*2); 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 8 - 1}px) / (#{$grid-columns} / #{8}));
+}
+
+.col-m-9, .col-offset-9{
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 9 - 1}px) / (#{$grid-columns} / #{9}));
+}
+
+.col-m-10, .col-offset-10{
+    width: calc((100% - 10*0.2px) / (12 / 10)); 
+}
+
+.col-m-11, .col-offset-11{
+    width: calc((100% - 10*0.0909090909px) / (12 / 11));
+}
+
+.col-m-12, .col-offset-12{
+    // width: 100%; 
+    width: calc((100% - #{$grid-spacing-px}*#{$grid-columns / 12 - 1}px) / (#{$grid-columns} / #{12}));
+}
+
+section {
+    & + & {
+        margin-top:$grid-spacing-px + px;
+    }
+}
+
+/* ==========================================================================
+   Settings: colors variables
+   ========================================================================== */
+   
+$white: #ffffff;
+$grey: #ecf0f1;
+$black: #000000;
+$facebook: #3b5998;
+$instagram: radial-gradient(circle at 33% 100%, #fed373 4%, #f15245 30%, #d92e7f 62%, #9b36b7 85%, #515ecf);
+$linkedin: #007BB6;
+$twitter: #00ACED;
+$pinterest: #CB2026;
+$blue: #233140;
+$blue_dark : #004f86;
+$tomato: tomato;
+
+@import "./scss_components/popup";
+@import "./scss_components/scrolltotop";
+@import "./scss_components/tabstoaccordion";
+@import "./scss_components/accordion";
+@import "./scss_components/accordion_vertical";
+@import "./scss_components/thepointer";
+@import "./scss_components/slider";
+@import "./scss_components/lazyload";
+@import "./scss_components/form";
+@import "./scss_components/table";
+
+/* ==========================================================================
+   Base: default style
+   ========================================================================== */
+   
+body{
+    font-family: 'Merriweather', serif;
+    background-color: $blue; 
+    font-size: 14px; 
+}
+
+h2{
+    font: 300 2em/2em Merriweather;
+}
+
+p, span{
+    //font: weight, size, line-height, font-family;
+    font: 300 14px/20px Merriweather;
+}
+
+a{
+    color: $tomato; 
+    @include transition (.3s);
+    cursor: pointer;
+    text-decoration: none;
+    &:hover{
+        color: $blue; 
+    }
+}
+
+/* ==========================================================================
+    Components: classes
+    ========================================================================== */
+
+.shadow{
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.button{
+   display: inline-block;
+   width: auto;
+   height: auto;
+   padding: 11px 24px;
+   margin: 10px 0; 
+   font-size: 13px;
+   text-transform: uppercase;
+   color: $white;
+   background-color: $tomato;
+   border: 2px solid $tomato;
+   text-align: center;
+   text-decoration: none;
+   cursor: pointer;
+   outline: none;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   line-height: normal;
+   @include transition (.3s);
+   &:hover, &:focus{
+       background-color: $white;
+       border: 2px solid $white;
+       color: $tomato; 
+   }
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+header{
+    position: fixed;
+    width: 100%;
+    background-color: $white;
+    z-index: 12;
+    .header_inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .header_branding{
+            .logo{
+                i{
+                    color: $tomato;
+                    @include transition (.3s); 
+                    padding: 10px; 
+                }
+                &:hover{
+                    i{
+                        color: $blue; 
+                    }
+                }
+            }
+        }
+        nav{
+            .menu{
+                display: flex;
+                justify-content: flex-end; 
+                font-size: 13px;
+                text-transform: uppercase; 
+                li{
+                    padding: 10px;
+                    display: inline-block;
+                    @include transition (.3s);
+                    a{
+                        color: $blue; 
+                        padding: 10px;
+                    }
+                    &.active, &:hover, &:focus{
+                        a{
+                            background-color: tomato;
+                            color: $white; 
+                        }
+                    }
+                    &:last-child{
+                        padding-right: 0; 
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    header{
+        .header_inner{
+            nav{
+                background: $grey;
+                display: block;
+                position: fixed;
+                overflow-y: auto;
+                overflow-x: hidden;
+                box-shadow:inset 1px 1px 5px 0 rgba(0,0,0,.45);
+                &.from_left_effect{
+                    width: 200px;
+                    height: 100%;
+                    left: -200px;
+                    top: 68px;  
+                    -webkit-transition: left 0.25s ease;
+                    -moz-transition: left 0.25s ease;
+                    -ms-transition: left 0.25s ease;
+                    -o-transition: left 0.25s ease;
+                    transition: left 0.25s ease;
+                    &.visible {
+                        left: 0px;
+                        -webkit-transition: left 0.25s ease;
+                        -moz-transition: left 0.25s ease;
+                        -ms-transition: left 0.25s ease;
+                        -o-transition: left 0.25s ease;
+                        transition: left 0.25s ease;               
+                    }
+                }
+                &.from_top_effect{
+                    top: -200px; 
+                    -webkit-transition: top 0.25s ease;
+                    -moz-transition: top 0.25s ease;
+                    -ms-transition: top 0.25s ease;
+                    -o-transition: top 0.25s ease;
+                    transition: top 0.25s ease;
+                    width: calc(100% - 20px); 
+                    &.visible {
+                        top: 68px;
+                        -webkit-transition: top 0.25s ease;
+                        -moz-transition: top 0.25s ease;
+                        -ms-transition: top 0.25s ease;
+                        -o-transition: top 0.25s ease;
+                        transition: top 0.25s ease;       
+                    }
+                }
+
+                 .menu{
+                    flex-direction: column;
+                    margin-top: 10px;
+                     li{
+                         padding: 0;
+                         a{
+                             width: 100%;
+                             display: flex;
+                             padding: 20px; 
+                         }
+                     }
+                 }
+            }
+            .hamburger-menu{
+                display: block;
+            }
+        }
+    }
+  
+}
+
+[class^="col-"] {
+    background-color: $grey;
+    padding: 20px; 
+}
+
+/* ==========================================================================
+   Overlay
+   ========================================================================== */
+
+.bodyoverlay {
+    background: rgba(0,0,0,0.5);
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    z-index: 11;
+    &.cover-bg{
+        display: block;
+    }
+}
+
+/* ==========================================================================
+   Hamburger menu
+   ========================================================================== */
+
+$bar-width: 30px;
+$bar-height: 4px;
+$bar-spacing: 9px;
+
+.hamburger-menu {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: $bar-width;
+    height: $bar-height + $bar-spacing*2;
+    cursor: pointer;
+    display: none; 
+    .bar {
+        position: relative;
+        transform: translateY($bar-spacing);
+        background: rgba(255, 99, 71, 1);
+        transition: all 0ms 300ms;
+        &, &:after, &:before {
+            width: $bar-width;
+            height: $bar-height;
+        }
+        &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: $bar-spacing;
+            background: rgba(255, 99, 71, 1);
+            transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: $bar-spacing;
+            background: rgba(255, 99, 71, 1);
+            transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        &.animate {
+            background: rgba(255, 99, 71, 0);
+            &:after {
+                top: 0;
+                transform: rotate(45deg);
+                transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+            &:before {
+                bottom: 0;
+                transform: rotate(-45deg);
+                transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+            }
+        }
+    }
+}
+
+/* ==========================================================================
+   Sections
+   ========================================================================== */
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+/* ==========================================================================
+   Media Queries @media only screen and (max-width: (x)px) {}
+   ========================================================================== */
+
+@media only screen and (max-width: 1000px) {
+
+    .container{
+        margin: 10px;
+    }
+  
+}
+

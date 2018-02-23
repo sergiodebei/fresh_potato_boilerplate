@@ -1,0 +1,1 @@
+!function(){"use strict";function n(){i=t.offsetHeight,o.style.paddingTop=i+"px"}function e(){}var o=document.querySelector("main"),t=document.querySelector("header"),i;window.onload=function(){n(),e()},window.onresize=function(){n()}}();

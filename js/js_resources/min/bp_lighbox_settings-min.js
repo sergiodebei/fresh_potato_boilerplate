@@ -1,0 +1,1 @@
+lightbox.option({albumLabel:"",disableScrolling:!1});
